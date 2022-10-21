@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
-{% block content%}
+{%block content%}
 
 
 <div class="container py-5">
-  <h1>Последние обновления на сайте</h1>
+  <h1>
+    {{ group.title }}
+  </h1>
+  <p>
+    {{ group.description }}
+  </p>
   <article>
     {% for post in posts %}
     <ul>
@@ -14,15 +19,12 @@
         Дата публикации: {{ post.pub_date|date:"d E Y" }}
       </li>
     </ul>
-    <p>
-      {{ post.text }}
-    </p>
-    {% if post.group %}
-      <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
-    {% endif %}
-    {% if not forloop.last %}
-      <hr>
-    {% endif %}
+      <p>
+        {{ post.text }}
+      </p>
+      {% if not forloop.last %}
+        <hr>
+      {% endif %}
     {% endfor %}
   </article>
 </div>
